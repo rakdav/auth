@@ -1,5 +1,6 @@
 package com.example.auth.payload.request;
 
+import com.example.auth.annotations.PasswordMatches;
 import com.example.auth.annotations.ValidEmail;
 import lombok.Data;
 
@@ -9,10 +10,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Data
+@PasswordMatches
 public class SignupRequest {
     @Email(message = "It should have email format")
     @NotBlank(message = "User email is required")
-    //@ValidEmail
+    @ValidEmail
     private String email;
     @NotEmpty(message = "Please enter your name")
     private String firstname;
@@ -24,5 +26,5 @@ public class SignupRequest {
     @Size(min=6)
     private String password;
     private String configurePassword;
-//
+
 }
