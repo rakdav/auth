@@ -29,9 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomUserDetailsService customUserDetailsService;
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(jwtAuthentificationEntryPoint)
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests().antMatchers(SecurityConstants.SIGN_UP_URLS).permitAll().anyRequest().authenticated();
+        http.cors().and().csrf().disable().
+                exceptionHandling().authenticationEntryPoint(jwtAuthentificationEntryPoint).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().
+                authorizeRequests().antMatchers(SecurityConstants.SIGN_UP_URLS).permitAll().
+                anyRequest().authenticated();
         http.addFilterBefore(jwtAuthentificationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
     @Bean
